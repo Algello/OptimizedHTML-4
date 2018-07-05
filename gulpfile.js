@@ -1,11 +1,12 @@
 var gulp = require('gulp'),
-    gutil = require('gulp-util'),
+    /*gutil = require('gulp-util'),*/
     sass = require('gulp-sass'),
     postcss = require('gulp-postcss'),
     browsersync = require('browser-sync'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
     cleancss = require('gulp-clean-css'),
+    gcmq = require('gulp-group-css-media-queries');
     rename = require('gulp-rename'),
     autoprefixer = require('gulp-autoprefixer'),
     notify = require("gulp-notify"),
@@ -16,7 +17,7 @@ rsync = require('gulp-rsync');
 
 gulp.task('js', function () {
     return gulp.src([
-        'app/libs/jquery/dist/jquery.min.js',
+        /*'app/libs/jquery/dist/jquery.min.js',*/
         'app/js/common.js', // Always at the end
     ])
         .pipe(concat('scripts.min.js'))
@@ -46,6 +47,7 @@ gulp.task('sass', function () {
         .pipe(rename({suffix: '.min', prefix: ''}))
         .pipe(autoprefixer(['last 15 versions']))
         .pipe(cleancss({level: {1: {specialComments: 0}}})) // Opt., comment out when debugging
+        .pipe(gcmq())
         .pipe(gulp.dest('app/css'))
         .pipe(browsersync.reload({stream: true}))
 });
