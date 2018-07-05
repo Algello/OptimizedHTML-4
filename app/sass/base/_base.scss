@@ -17,22 +17,4 @@ html {
 
 body {
   box-sizing: border-box;
-
-  .container {
-    @include wrapper();
-  }
-
-  .row {
-    padding: 2rem 3rem;
-  @include row-flex();
-}
-
-  .col-1-3 {
-  @include col();
-  @include size(4);
-}
-  .col-1-6 {
-    @include col();
-    @include size(6);
-  }
 }
